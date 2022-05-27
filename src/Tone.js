@@ -59,7 +59,7 @@ class Tone {
   }
 
   recordHistory() {
-    if (this.historyCount % 5 == 0) {
+    if (this.historyCount % 5 === 0) {
       this.positionHistory.push([this.pos.x, this.pos.y]);
     }
 

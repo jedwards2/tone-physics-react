@@ -10,10 +10,8 @@ function SketchDiv() {
   //set gravity (good at 1)
   const G = 2;
 
-  let x = 1;
-  // let y = 50;
-
   const setup = (p5, canvasParentRef) => {
+    let x = 1;
     let cnv = p5.createCanvas(p5.windowWidth, 1600).parent(canvasParentRef);
     cnv.position(0, 50);
 
