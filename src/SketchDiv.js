@@ -10,16 +10,10 @@ function SketchDiv() {
   //set gravity (good at 1)
   const G = 2;
 
-  let x = 50;
-  let y = 50;
+  let x = 1;
+  // let y = 50;
 
   const setup = (p5, canvasParentRef) => {
-    let v1 = p5.createVector(3, 2, 4);
-    let v2 = p5.constructor.Vector.div(v1, 2);
-    console.log(v2);
-    // use parent to render the canvas in this ref
-    // (without that p5 will render the canvas outside of your component)
-    // p5.createCanvas(500, 500).parent(canvasParentRef);
     let cnv = p5.createCanvas(p5.windowWidth, 1600).parent(canvasParentRef);
     cnv.position(0, 50);
 
@@ -32,18 +26,11 @@ function SketchDiv() {
     massSlider = p5.createSlider(11, 150, 10);
     massSlider.position(10, 10);
     massSlider.style("width", "80px");
-    cnv.mousePressed((event) => {
+    cnv.mousePressed(() => {
       if (p5.mouseX > p5.width || p5.mouseY > p5.height || p5.mouseY < 0) {
         return;
       }
-      let tone = new Tone(
-        p5,
-        p5.mouseY,
-        massSlider.value(),
-        tones,
-        G,
-        resetAllIndices
-      );
+      let tone = new Tone(p5, p5.mouseY, massSlider.value(), G);
 
       for (let i = tones.length - 1; i >= 0; i--) {
         let dist = tones[i].pos.y - p5.mouseY;
@@ -61,12 +48,6 @@ function SketchDiv() {
   };
 
   const draw = (p5) => {
-    p5.background(0);
-    // p5.ellipse(x, y, 70, 70);
-    // // NOTE: Do not use setState in the draw function or in functions that are executed
-    // // in the draw function...
-    // // please use normal variables or class properties for these purposes
-    // x++;
     p5.background(0);
     let allPos = {};
     for (let q = poles.length - 1; q >= 0; q--) {
@@ -88,8 +69,8 @@ function SketchDiv() {
         for (let i = tones.length - 1; i >= 0; i--) {
           allPos[i] = [tones[i].pos.y, tones[i].mass];
         }
-        // console.log(allPos);
-        tones[i].removeTone();
+        tones[i].removeTone(tones);
+        resetAllIndices();
         return;
       }
     }

@@ -1,5 +1,5 @@
 class Tone {
-  constructor(p5, y, m, tones, G, resetAllIndices) {
+  constructor(p5, y, m, G) {
     this.pos = p5.createVector(p5.width, y);
     this.velocity = p5.createVector(0, 0);
     this.p = p5;
@@ -10,9 +10,7 @@ class Tone {
     this.positionHistory = [];
     this.c = 255;
     this.historyCount = 0;
-    this.tones = tones;
     this.tone = G;
-    this.resetAllIndices = resetAllIndices;
   }
 
   drag() {
@@ -112,9 +110,8 @@ class Tone {
     } else return false;
   }
 
-  removeTone() {
-    this.tones.splice(this.index, 1);
-    this.resetAllIndices();
+  removeTone(tones) {
+    tones.splice(this.index, 1);
   }
 }
 
