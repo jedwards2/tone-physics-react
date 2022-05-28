@@ -1,6 +1,6 @@
 import Sketch from "react-p5";
 import Pole from "./Pole";
-import Tone from "./Tone";
+import ToneCircle from "./Tone";
 
 function SketchDiv() {
   let tones = [];
@@ -29,7 +29,7 @@ function SketchDiv() {
       if (p5.mouseX > p5.width || p5.mouseY > p5.height || p5.mouseY < 0) {
         return;
       }
-      let tone = new Tone(p5, p5.mouseY, massSlider.value(), G);
+      let tone = new ToneCircle(p5, p5.mouseY, massSlider.value(), G);
 
       for (let i = tones.length - 1; i >= 0; i--) {
         let dist = tones[i].pos.y - p5.mouseY;
@@ -62,13 +62,14 @@ function SketchDiv() {
       }
 
       tones[i].display();
+      tones[i].play();
       tones[i].loseMass();
       if (tones[i].checkMass()) {
         tones[i].mass = 0;
         for (let i = tones.length - 1; i >= 0; i--) {
           allPos[i] = [tones[i].pos.y, tones[i].mass];
         }
-        tones[i].removeTone(tones);
+        tones[i].removeToneCircle(tones);
         resetAllIndices();
         return;
       }

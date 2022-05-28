@@ -1,5 +1,7 @@
-class Tone {
-  constructor(p5, y, m, G) {
+import * as Tone from "tone";
+
+class ToneCircle {
+  constructor(p5, y, m) {
     this.pos = p5.createVector(p5.width, y);
     this.velocity = p5.createVector(0, 0);
     this.p = p5;
@@ -10,7 +12,7 @@ class Tone {
     this.positionHistory = [];
     this.c = 255;
     this.historyCount = 0;
-    this.tone = G;
+    this.synth = new Tone.Synth().toDestination();
   }
 
   drag() {
@@ -56,6 +58,13 @@ class Tone {
     let radius = this.mass / 2;
     this.p.circle(this.pos.x, this.pos.y, radius);
     this.p.pop();
+  }
+
+  play() {
+    let freq = new Tone.Frequency(this.pos.y);
+    let midi = freq.toMidi();
+    // console.log(freq.frequencytoMidi(this.pos));
+    this.synth.triggerAttackRelease(midi, "64n");
   }
 
   recordHistory() {
@@ -110,9 +119,9 @@ class Tone {
     } else return false;
   }
 
-  removeTone(tones) {
+  removeToneCircle(tones) {
     tones.splice(this.index, 1);
   }
 }
 
-export default Tone;
+export default ToneCircle;
