@@ -61,9 +61,11 @@ class ToneCircle {
   }
 
   play() {
-    let freq = new Tone.Frequency(this.pos.y * this.pos.y);
-    let midi = freq.toMidi();
-    this.synth.triggerAttackRelease(midi, "32n");
+    if (this.pos.y > 0) {
+      let freq = new Tone.Frequency(this.pos.y * this.pos.y);
+      let midi = freq.toMidi();
+      this.synth.triggerAttackRelease(midi, "32n");
+    }
   }
 
   recordHistory() {
