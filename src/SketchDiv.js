@@ -7,13 +7,13 @@ function SketchDiv() {
   let poleValues = [55, 110, 220, 440, 880, 1760];
   let poles = [];
   let massSlider;
-  //set gravity (good at 1)
+  //set gravity (good at 1 or 2)
   const G = 2;
 
   const setup = (p5, canvasParentRef) => {
     let x = 1;
     let cnv = p5.createCanvas(p5.windowWidth, 1600).parent(canvasParentRef);
-    cnv.position(0, 50);
+    cnv.position(0, 0);
 
     for (let q = poleValues.length - 1; q >= 0; q--) {
       let pole = new Pole(p5, poleValues[q], x * x, G);
@@ -24,6 +24,7 @@ function SketchDiv() {
     massSlider = p5.createSlider(11, 150, 10);
     massSlider.position(10, 10);
     massSlider.style("width", "80px");
+
     cnv.mousePressed(() => {
       if (p5.mouseX > p5.width || p5.mouseY > p5.height || p5.mouseY < 0) {
         return;
