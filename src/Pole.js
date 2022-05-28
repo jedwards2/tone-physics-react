@@ -1,9 +1,9 @@
 class Pole {
   constructor(p5, y, m, G) {
+    this.p = p5;
     this.pos = p5.createVector(p5.width, y);
     this.mass = m;
     this.width = p5.sqrt(this.mass) * 10;
-    this.p = p5;
     this.G = G;
   }
 

@@ -61,10 +61,9 @@ class ToneCircle {
   }
 
   play() {
-    let freq = new Tone.Frequency(this.pos.y);
+    let freq = new Tone.Frequency(this.pos.y * this.pos.y);
     let midi = freq.toMidi();
-    // console.log(freq.frequencytoMidi(this.pos));
-    this.synth.triggerAttackRelease(midi, "64n");
+    this.synth.triggerAttackRelease(midi, "32n");
   }
 
   recordHistory() {
@@ -73,7 +72,6 @@ class ToneCircle {
     }
 
     this.historyCount += 1;
-    // console.log(this.positionHistory.length);
   }
 
   updateHistory() {
