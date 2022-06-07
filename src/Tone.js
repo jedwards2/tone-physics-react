@@ -12,7 +12,7 @@ class ToneCircle {
     this.positionHistory = [];
     this.c = 255;
     this.historyCount = 0;
-    this.synth = new Tone.Synth().toDestination();
+    this.synth = new Tone.AMSynth().toDestination();
   }
 
   drag() {
@@ -65,7 +65,7 @@ class ToneCircle {
       let freq = new Tone.Frequency(this.pos.y * this.pos.y);
       let midi = freq.toMidi();
       if (midi > 0) {
-        this.synth.triggerAttackRelease(midi, "32n");
+        this.synth.triggerAttackRelease(midi, "64n");
       }
     }
   }
