@@ -1,13 +1,13 @@
 {
   "files": {
     "main.css": "/tone-physics-react/static/css/main.8e8c7f3f.css",
-    "main.js": "/tone-physics-react/static/js/main.b00cbc5b.js",
+    "main.js": "/tone-physics-react/static/js/main.acb18559.js",
     "index.html": "/tone-physics-react/index.html",
     "main.8e8c7f3f.css.map": "/tone-physics-react/static/css/main.8e8c7f3f.css.map",
-    "main.b00cbc5b.js.map": "/tone-physics-react/static/js/main.b00cbc5b.js.map"
+    "main.acb18559.js.map": "/tone-physics-react/static/js/main.acb18559.js.map"
   },
   "entrypoints": [
     "static/css/main.8e8c7f3f.css",
-    "static/js/main.b00cbc5b.js"
+    "static/js/main.acb18559.js"
   ]
 }
