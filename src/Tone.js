@@ -13,6 +13,7 @@ class ToneCircle {
     this.c = 255;
     this.historyCount = 0;
     this.synth = new Tone.AMSynth().toDestination();
+    this.timeCount = 0;
   }
 
   drag() {
@@ -61,11 +62,13 @@ class ToneCircle {
   }
 
   play() {
+    this.timeCount += 0.01;
     if (this.pos.y >= 0) {
       let freq = new Tone.Frequency(this.pos.y * this.pos.y);
       let midi = freq.toMidi();
+      const now = Tone.now();
       if (midi > 0) {
-        this.synth.triggerAttackRelease(midi, "64n");
+        this.synth.triggerAttackRelease(midi, "64n", now + this.timeCount);
       }
     }
   }
