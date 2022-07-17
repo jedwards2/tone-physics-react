@@ -41,6 +41,18 @@ function App() {
               onChange={(value) => setReverb(value.target.value)}
             />
           </div>
+          <div className="text-box">
+            <h1>About</h1>
+            <p>Physics system for musical tones in the browser. </p>
+            <p>Built with React and Tone.js</p>
+            <h2>To Use:</h2>
+            <p>Click anywhere in the canvas to create a new Tone.</p>
+            <p>Adjust the distortion and reverb amounts for any new Tone.</p>
+          </div>
+          <div className="text-box">
+            <h1>Created by:</h1>
+            <a href="https://github.com/jedwards2">jedwards2</a>
+          </div>
         </div>
       </div>
     </div>
