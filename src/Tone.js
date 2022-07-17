@@ -1,7 +1,7 @@
 import * as Tone from "tone";
 
 class ToneCircle {
-  constructor(p5, y, m) {
+  constructor(p5, y, m, reverb, distortion) {
     this.pos = p5.createVector(p5.width, y);
     this.velocity = p5.createVector(0, 0);
     this.p = p5;
@@ -12,6 +12,8 @@ class ToneCircle {
     this.positionHistory = [];
     this.c = 255;
     this.historyCount = 0;
+    this.reverb = new Tone.Reverb(reverb).toDestination();
+    this.dist = new Tone.Distortion(distortion).toDestination();
     this.synth = new Tone.AMSynth().toDestination();
     this.timeCount = 0;
   }
@@ -66,8 +68,10 @@ class ToneCircle {
     if (this.pos.y >= 0) {
       let freq = new Tone.Frequency(this.pos.y * this.pos.y);
       let midi = freq.toMidi();
+
       const now = Tone.now();
       if (midi > 0) {
+        this.synth.chain(this.dist, this.reverb);
         this.synth.triggerAttackRelease(midi, "64n", now + this.timeCount);
       }
     }
@@ -124,8 +128,12 @@ class ToneCircle {
     } else return false;
   }
 
-  removeToneCircle(tones) {
-    tones.splice(this.index, 1);
+  removeToneCircle(setTones) {
+    setTones((prevState) => {
+      let newTones = [...prevState];
+      newTones.splice(this.index, 1);
+      return newTones;
+    });
   }
 }
 

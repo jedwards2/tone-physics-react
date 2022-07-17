@@ -2,6 +2,32 @@
   display: flex;
   text-align: center;
   justify-content: center;
+  color: black;
+  flex-direction: column;
+}
+
+.header {
+  display: flex;
+  justify-content: center;
   background-color: rgb(60, 60, 60);
-  color: white
+}
+
+.sketch--div{
+  width: 800px;
+  height: 1600px;
+}
+
+.sidebar {
+  display: flex;
+  flex-direction: column;
+  padding: 50px;
+}
+
+.main--div {
+  display: flex;
+  flex-direction: row;
+}
+
+.synth-controls {
+  background-color: blue;
 }

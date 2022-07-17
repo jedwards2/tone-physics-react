@@ -1,23 +1,25 @@
 import Sketch from "react-p5";
 import Pole from "./Pole";
 import ToneCircle from "./Tone";
+import { useState } from "react";
 
-function SketchDiv() {
-  let tones = [];
+function SketchDiv({ distortion, reverb }) {
+  const [tones, setTones] = useState([]);
+
   let poleValues = [55, 110, 220, 440, 880, 1760];
-  let poles = [];
+  const [poles, setPoles] = useState([]);
   // let massSlider;
   //set gravity (good at 1 or 2)
   const G = 2;
 
   const setup = (p5, canvasParentRef) => {
     let x = 1;
-    let cnv = p5.createCanvas(p5.windowWidth, 1600).parent(canvasParentRef);
+    let cnv = p5.createCanvas(800, 1600).parent(canvasParentRef);
     cnv.position(0, 80);
 
     for (let q = poleValues.length - 1; q >= 0; q--) {
       let pole = new Pole(p5, poleValues[q], x * x, G);
-      poles.push(pole);
+      setPoles((prevState) => [...prevState, pole]);
       x += 1;
     }
 
@@ -30,7 +32,7 @@ function SketchDiv() {
         return;
       }
       // let tone = new ToneCircle(p5, p5.mouseY, massSlider.value(), G);
-      let tone = new ToneCircle(p5, p5.mouseY, 11, G);
+      let tone = new ToneCircle(p5, p5.mouseY, 11, reverb, distortion);
 
       for (let i = tones.length - 1; i >= 0; i--) {
         let dist = tones[i].pos.y - p5.mouseY;
@@ -43,7 +45,11 @@ function SketchDiv() {
         tones[i].applyForce(force);
       }
 
-      tones.push(tone);
+      setTones((prevState) => {
+        let newTones = [...prevState];
+        newTones.push(tone);
+        return newTones;
+      });
     });
   };
 
@@ -70,7 +76,7 @@ function SketchDiv() {
         for (let i = tones.length - 1; i >= 0; i--) {
           allPos[i] = [tones[i].pos.y, tones[i].mass];
         }
-        tones[i].removeToneCircle(tones);
+        tones[i].removeToneCircle(setTones);
         resetAllIndices();
         return;
       }
