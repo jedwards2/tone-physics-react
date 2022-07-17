@@ -28,6 +28,8 @@ function App() {
               min={1}
               max={100}
             />
+          </div>
+          <div className="synth-controls">
             <h1>Reverb</h1>
             <Slider
               size="small"

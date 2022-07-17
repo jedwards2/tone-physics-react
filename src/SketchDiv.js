@@ -15,7 +15,7 @@ function SketchDiv({ distortion, reverb }) {
   const setup = (p5, canvasParentRef) => {
     let x = 1;
     let cnv = p5.createCanvas(800, 1600).parent(canvasParentRef);
-    cnv.position(0, 80);
+    cnv.position(25, 120);
 
     for (let q = poleValues.length - 1; q >= 0; q--) {
       let pole = new Pole(p5, poleValues[q], x * x, G);
